@@ -68,7 +68,7 @@ public class CalculadoraTest {
     @Test
     public void testDivisaoNegativo() {
         Calculadora calculadora = new Calculadora();
-        assertEquals(2, calculadora.calcular(6, 3, "/"));
+        assertEquals(-2, calculadora.calcular(6, -3, "/"));
     }
 
     @Test
