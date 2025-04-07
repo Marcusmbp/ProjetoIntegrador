@@ -104,7 +104,11 @@ public class CalculadoraGUI extends JFrame implements ActionListener {
         if ("0123456789.".contains(comando)) {
             if (novoNumero) {
                 display.setText(comando);
-                num2 = display.getText();
+                if (operador.isEmpty()) {
+                    num1 = Double.parseDouble(display.getText().replace(",", "."));
+                } else {
+                    num2 = display.getText();
+                }
                 novoNumero = false;
             } else {
                 display.setText(display.getText() + comando);
@@ -134,6 +138,7 @@ public class CalculadoraGUI extends JFrame implements ActionListener {
             display.setText("0");
             displayOperacao.setText(" ");
             num1 = 0;
+            num2 = "indefinido";
             operador = "";
             novoNumero = true;
         } else if ("CE".equals(comando)) {
@@ -157,6 +162,11 @@ public class CalculadoraGUI extends JFrame implements ActionListener {
         } else if ("+/-".equals(comando)) {
             double valor = Double.parseDouble(display.getText().replace(",", "."));
             DecimalFormat df = new DecimalFormat("#.########");
+            if (valor == num1) {
+                num1 = Double.parseDouble(df.format(-valor));
+            } else {
+                num2 = String.valueOf(df.format(-valor));
+            }
             display.setText(String.valueOf(df.format(-valor)));
         } else if (",".equals(comando)) {
             if (!display.getText().contains(",")) {
